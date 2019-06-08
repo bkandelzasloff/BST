@@ -1,0 +1,5 @@
+fun treefold (f : 'a*'b*'b -> 'b) (b : 'b) (t : 'a tree) : 'b =
+    case t of
+         E => b
+       | N(x, t0, t1) =>
+           f(x, treefold f b t0, treefold f b t1)
