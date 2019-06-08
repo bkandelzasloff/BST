@@ -1,0 +1,10 @@
+  fun member(x : int, t : bst) : bool =
+    lazyTreeRec (fn (y, t0, t1, r0, r1) => if x = y then true else
+      if x < y then r0() else r1()) false t
+    
+  fun add(x : int, t : bst) : bst =
+    lazyTreeRec (fn (y, t0, t1, r0, r1) =>
+      if x = y then N(x, t0, t1) 
+      else if x < y then N(y, r0(), t1)
+      else N(y, t0, r1()))
+      (N(x, E, E)) t
