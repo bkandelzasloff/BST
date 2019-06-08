@@ -1,0 +1,7 @@
+  fun listToTree (xs : int list, t : int tree) =
+    case xs of
+         [] => t
+       | y :: ys => listToTree(ys, add(y, t))
+
+  fun fromList (xs : int list) : bst =
+    listToTree(xs, E)
