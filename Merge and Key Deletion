@@ -1,0 +1,15 @@
+fun mergeTree (t0 : bst, t1 : bst) : bst =
+    case (t0, t1) of
+         (E, E) => E
+       | (E, _) => t1
+       | (_, E) => t0
+       | (t0 , N(y, t10, t11)) =>
+            lazyTreeRec(fn (x, t00, t01, r0, r1) => 
+              N(x, t00, N(y, r1(), t11))) E t0
+
+  fun delete(x : int, t : bst) : bst =
+    lazyTreeRec(fn (y, t0, t1, r0, r1) =>
+      if x = y then mergeTree(t0, t1)
+      else if x < y then N(y,r0(),t1)
+      else N(y,t0,r1())
+      ) E t
