@@ -1,0 +1,13 @@
+  fun size(t : 'a tree) : int =
+    case t of
+         N(x, E, E) => 1
+       | N(x, _, _) =>
+           treefold (fn (y, a, b) => 1 + a + b) 0 t 
+
+  fun listItems (t : bst) : int list =
+    case t of
+         N(x, E, E) => [x]
+       | N(x, t0, E) => listItems(t0) @ [x]
+       | N(x, E, t1) => [x] @ listItems(t1)
+       | N(x, t0, t1) =>
+           treefold (fn (y, a, b) => a @ [y] @ b) [] t
