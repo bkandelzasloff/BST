@@ -1,0 +1,11 @@
+  fun lazyTreeRec (f : int * bst * bst * (unit -> 'b) * (unit -> 'b) ->
+    'b) (b : 'b) (t : bst) : 'b =
+    case t of
+         E => b
+       | N(x, t0, t1) =>
+           let
+             val g0 = (fn () => lazyTreeRec f b t0)
+             val g1 = (fn () => lazyTreeRec f b t1)
+           in
+             f(x, t0, t1, g0, g1)
+           end
