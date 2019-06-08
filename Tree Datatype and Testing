@@ -1,0 +1,16 @@
+  datatype 'a tree = E
+                   | N of 'a*'a tree*'a tree
+  
+  fun isBST(t : int tree) : bool =
+    case t of
+         N(x, E, E) => true
+       | N(x, N(y, t11, t12), E) =>
+           if x > y andalso isBST(N(y, t11, t12)) then true else false
+       | N(x, E, N(y, t21, t22)) =>
+           if x < y andalso isBST(N(y, t21, t22)) then true else false
+       | N(x, N(y, t11, t12), N(z, t21, t22)) =>
+           if x > y andalso
+           x < z andalso
+           isBST(N(y, t11, t12)) andalso
+           isBST(N(z, t21, t22))
+           then true else false
